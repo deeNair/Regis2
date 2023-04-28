@@ -1,33 +1,31 @@
-import {useState} from 'react';
-
-import { Routes, Route } from 'react-router-dom';
-
-import NewOrderPage from './pages/NewOrderPage';
-import AuthPage from './pages/AuthPage';
-import OrderHistoryPage from './pages/OrderHistoryPage';
-import NavBar from './components/NavBar';
-
-import { getUser } from './utilities/users-service';
+// import {useState} from 'react';
+// import { getUser } from './utilities/users-service';
 
 import './App.css';
 
+
+// import { Routes, Route } from 'react-router-dom';
+import { Routes, Route} from 'react-router-dom';
+
+
+//components imports
+import NavBar from './components/NavBar';
+import AllUsers from './components/AllUsers';
+import AddUser from './components/AddUser';
+import Homepage from './components/HomePage';
+
 function App() {
-  const [user, setUser] = useState(getUser());
+  // const [user, setUser] = useState(getUser());
 
   return (
-    <main className="App">
-     { user ? 
-      <>
-      <NavBar user={user} setUser={setUser}/>
-      <Routes>
-        <Route path='/orders/new' element={ <NewOrderPage /> }/>
-        <Route path='/orders' element={ <OrderHistoryPage /> }/>
+    <>
+      <NavBar/>
+       <Routes>
+        <Route path='/'element={<Homepage/>}/>
+         <Route path='/all'element={<AllUsers/>}/>
+         <Route path='/add'element={<AddUser/>}/>
       </Routes>
-      </>
-     : 
-      <AuthPage setUser={setUser}/>
-      }
-    </main>
+   </>
   );
 }
 
