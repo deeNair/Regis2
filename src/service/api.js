@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const URL="";
+const URL="/api/users";
 
 export const addUser= async (data)=>{
     try{
@@ -9,3 +9,10 @@ export const addUser= async (data)=>{
         console.log('Error while calling add User Api', error);
     }
     }
+export const getUsers= async()=>{
+    try {
+       return await axios.get(`${URL}/all`)
+    }catch (error){
+        console.log('error while calling getUsers API', error)
+    }
+}

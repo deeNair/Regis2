@@ -1,5 +1,26 @@
 //* Request handler Logic
-const User = require('../../models/user');
+const User= require('../../schema/user-schema');
+ const addUser= async(req, res)=>{
+
+    
+    try {
+        const user= await User.create(req.body);
+        res.status(201).json(user);
+    } catch(error){
+        res.status(409).json({message:error.message})
+    }
+}
+
+ const getUsers= async(req, res)=> {
+    try {
+        const users= await User.find({});
+        response.status(200).json(users);
+    }catch (error){
+        response.status(400).json({message:error.message})
+    }
+    }
+
+
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
@@ -54,5 +75,8 @@ async function checkToken(req, res) {
 module.exports = {
     create,
     login,
-    checkToken
+    checkToken,
+    addUser,
+    getUsers
+
 }

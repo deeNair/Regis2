@@ -1,5 +1,5 @@
 
-
+import axios from "axios";
 import { FormControl, FormGroup, InputLabel, Input, Typography, styled, Button } from "@mui/material";
 import { useState } from "react";
 import { addUser } from "../service/api";
@@ -23,13 +23,16 @@ const AddUser = () => {
     }
 
 
-    const addUserDetails = async () => {
-        await addUser(user);
-
-    }
-
-    return (
-        <Container>
+    const addUserDetails =  (e) => {
+        e.preventDefault();
+        axios.post("http://localhost:3001/add/", {
+    user
+      });
+      window.location.reload();
+    };
+    
+        return (
+         <Container>
             <Typography variant="h4">Add User</Typography>
             <FormControl>
                 <InputLabel>Name</InputLabel>
@@ -48,7 +51,7 @@ const AddUser = () => {
                 <Input onChange={(e) => onValueChange(e)} name="phone" />
             </FormControl>
             <FormControl>
-                <Button variant="contained" onclick={() => addUserDetails()}>Add User</Button>
+                <Button variant="contained" onClick={() => addUserDetails()}>Add User</Button>
             </FormControl>
         </Container>
     )
