@@ -16,3 +16,10 @@ export const getUsers= async()=>{
         console.log('error while calling getUsers API', error)
     }
 }
+export const getUser= async (Name)=>{
+    try{
+        return await axios.get(`${URL}/$(Name)`);
+    }catch (error){
+        console.log('Error while calling getUser api', error);
+    }
+}

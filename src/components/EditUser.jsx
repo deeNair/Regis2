@@ -1,12 +1,23 @@
 
 import axios from "axios";
 import { FormControl, FormGroup, InputLabel, Input, Typography, styled, Button } from "@mui/material";
-import { useState } from "react";
-import { addUser } from "../service/api";
+import { useState, useEffect,  } from "react";
+import { addUser, getUser } from "../service/api";
 //import { useNavigate } from "react-router-dom";
+const {Name}=useParams();
+import { useParams } from "react-router-dom";
+
 const Container = styled(FormGroup)`
 width: 50%;
 margin:5% auto 0 auto;`
+
+useEffect(()=>{
+    loadUserDetails();
+},[])
+
+const loadUserDetails= async()=>{
+    const response =await getUsers(Name);
+}
 
 const defaultValue = {
     name: "",
@@ -15,16 +26,16 @@ const defaultValue = {
     phone: ""
 }
 //const useNavigate= navigate();
-const AddUser = () => {
+const EditUser = () => {
     const [user, setUser] = useState(defaultValue);
 
     const onValueChange = (e) => {
         setUser({ ...user, [e.target.name]: e.target.value })
         //   console.log (user)
     }
+    
 
-
-    const addUserDetails =  (e) => {
+    const EditUserDetails =  (e) => {
         e.preventDefault();
          //navigate('/all');
          axios.post("http://localhost:3001/add", {
@@ -37,7 +48,7 @@ const AddUser = () => {
     
         return (
          <Container>
-            <Typography variant="h4">Add User</Typography>
+            <Typography variant="h4">Edit User</Typography>
             <FormControl>
                 <InputLabel>Name</InputLabel>
                 <Input onChange={(e) => onValueChange(e)} name="name" />
@@ -55,11 +66,11 @@ const AddUser = () => {
                 <Input onChange={(e) => onValueChange(e)} name="phone" />
             </FormControl>
             <FormControl>
-                <Button variant="contained" onClick={() => addUserDetails()}>Add User</Button>
+                <Button variant="contained" onClick={() => EditUserDetails()}>Edit User</Button>
             </FormControl>
         </Container>
     )
 }
 
 
-export default AddUser;
+export default EditUser;

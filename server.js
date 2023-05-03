@@ -1,4 +1,4 @@
-// import { express } from "express";
+//const bodyParser = require ('body-parser');
 
 // const app= express();
 
@@ -7,15 +7,16 @@
 
 //  app.listen(PORT, ()=>console.log(`server is running successfully on port ${PORT}
 const userRoute = require('./routes/api/users')
-
 require('dotenv').config();
 require('./config/database'); // connects to db
 const express = require('express');
 const path = require('path'); // node module
 const favicon = require('serve-favicon');
 const logger = require('morgan');
-
-const app = express();
+const { default: app } = require('./src/App');
+const cors= require ('cors');
+// App.use (bodyParser.json({extended: true}));
+// const app = express();
 // development port: 3001
 // in production we'll a PORT number set in the environment variables
 const PORT = process.env.PORT || 3001;
@@ -25,6 +26,7 @@ const PORT = process.env.PORT || 3001;
 //* Config
 // Logger middleware
 app.use(logger('dev'));
+app.use(cors())
 // JSON payload middleware (for data coming from frontend functions)
 app.use(express.json());
 // Configure both serve-favicon & static middleware
