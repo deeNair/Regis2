@@ -1,4 +1,4 @@
-import axios from "axios";
+const axios= require('axios') ;
 
 const URL="/api/users";
 
@@ -18,8 +18,17 @@ export const getUsers= async()=>{
 }
 export const getUser= async (Name)=>{
     try{
-        return await axios.get(`${URL}/$(Name)`);
+        return await axios.get(`${URL}/$id`);
     }catch (error){
         console.log('Error while calling getUser api', error);
     }
 }
+    export const editUser=async(user, id)=>{
+        try{
+            return await axios.post(`${URL}/$id`, user)
+        }
+    catch (error){
+        console.log(`Error while calling editUser api`, error);
+
+    }
+    }

@@ -4,7 +4,7 @@
  import'./App.css';
 
 import { Routes, Route} from 'react-router-dom';
-
+ import { useState, useEffect,  } from "react";
 
 //components imports
 import NavBar from './components/NavBar';

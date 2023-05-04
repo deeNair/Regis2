@@ -5,7 +5,7 @@ const express = require('express');
 const router = express.Router();
 const usersCtrl = require('../../controllers/api/users');
 const { getUser } = require('../../src/service/api');
-
+const {editUser}= require ('../../controllers/api/users')
 //const ensureLoggedIn = require('../../config/ensureLoggedIn');
 
 
@@ -14,7 +14,8 @@ const { getUser } = require('../../src/service/api');
 
 router.post('/add', usersCtrl.addUser);
 router.get('/all', usersCtrl.getUsers);
-router.get('/:Name', getUser);//36
+router.get('/:id', getUser);
+router.post(`/:id`,editUser);
 //router.get('/check-token', ensureLoggedIn, usersCtrl.checkToken);
 
 
