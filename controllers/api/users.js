@@ -1,8 +1,8 @@
 //* Request handler Logic
 
-const User=require('../../schema/user-schema')
+const User=require('../../models/user-schema')
 
- const addUser= async(request, response)=>{
+ const addUser= async(request,response)=>{
     const user=request.body;
 
     const newUser= new User(user);
@@ -15,7 +15,7 @@ const User=require('../../schema/user-schema')
     }
 }
 
- const getUsers= async(request, response)=> {
+ const getUsers= async(request,response)=> {
     try {
         const users= await User.find({});
         response.status(200).json(users);

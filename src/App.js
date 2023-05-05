@@ -19,10 +19,10 @@ function App() {
     <>
       <NavBar/>
        <Routes>
-        <Route path='/'element={<Homepage/>}/>
-         <Route path='/all'element={<AllUsers/>}/>
-         <Route path='/add'element={<AddUser/>}/>
-         <Route path='/edit/:id'element={<EditUser/>}/>
+        <Route path='/' element={<Homepage/>}/>
+         <Route path='/all' element={<AllUsers/>}/>
+         <Route path='/add' element={<AddUser/>}/>
+         <Route path='/edit/:id' element={<EditUser/>}/>
       </Routes>
    </>
   );
