@@ -3,7 +3,7 @@ import axios from "axios";
 import { FormControl, FormGroup, InputLabel, Input, Typography, styled, Button } from "@mui/material";
 import { useState } from "react";
 import { addUser } from "../service/api";
-//import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 const Container = styled(FormGroup)`
 width: 50%;
 margin:5% auto 0 auto;`
@@ -17,6 +17,8 @@ const defaultValue = {
 //const useNavigate= navigate();
 const AddUser = () => {
     const [user, setUser] = useState(defaultValue);
+      
+    let navigate = useNavigate();
 
     const onValueChange = (e) => {
         setUser({ ...user, [e.target.name]: e.target.value })
@@ -24,14 +26,10 @@ const AddUser = () => {
     }
 
 
-    const addUserDetails =  (e) => {
-        e.preventDefault();
-         //navigate('/all');
-         axios.post("http://localhost:3001/add", {
-    user
-    
-      });
-      window.location.reload();
+    const addUserDetails =  async() => {
+       
+       await addUser(user);
+       navigate('/all');
      
     };
     

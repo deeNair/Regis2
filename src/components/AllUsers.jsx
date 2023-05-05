@@ -1,11 +1,11 @@
 import {Table, Styled, StyledTable, TableHead, TableBody, TableRow, TableCell, Button,}from '@mui/material';
 import { useEffect, useState } from 'react';
- import {getUsers} from'../service/api';
+ import {getUsers,deleteUser} from'../service/api';
 
-
+ import {Link} from 'react-router-dom';
 
 const AllUsers=()=>{
-    const [users, setUsers]=useState([])
+    const [users,setUsers]=useState([])
 
     useEffect(()=>{
         getAllUsers();
@@ -14,8 +14,12 @@ const AllUsers=()=>{
 
     const getAllUsers= async()=>{
         let response =await getUsers();
-        setUsers(response.data);
-
+        setUsers(response.data); 
+        console.log(response.data);
+    }
+    const deleteUsers=async(id)=>{
+      await deleteUser(id);
+      getAllUsers();
     }
         
     return(
@@ -26,28 +30,30 @@ const AllUsers=()=>{
                <TableCell>Username</TableCell>
                <TableCell>Email</TableCell>
                <TableCell>Phone</TableCell>
-               <TableCell></TableCell>
+               <TableCell>Edit</TableCell>
+        <TableCell>Delete</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-             {/* {
-              users.map(user =>(
-                <TBody>
+              {
+              users.map((user) =>(
+                <TableRow key={user._id}>
                   <TableCell>{user.name}</TableCell>
                   <TableCell>{user.username}</TableCell>
                   <TableCell>{user.email}</TableCell>
                   <TableCell>{user.phone}</TableCell>
                   <TableCell>
-                    <Button variant="contained" styled= {{marginRight:10}}component={Link} to(`/edit/$/user._Name`)>Edit</Button>
-                    <Button variant="contained" color="secondary">Delete</Button>
+                    <Button variant="contained" component={Link} to={`/edit/${user._id}`}>Edit
+                    </Button>
+                    <Button variant="contained" color="secondary"  onClick={()=>deleteUsers(user._id)}>Delete</Button>
                   </TableCell>
-                </TBody>
-              )) */}
-             
+                  </TableRow>
+              ))
+              }
 
            </TableBody>
         </Table>
     )
 }
 
-export default AllUsers
+export default AllUsers;

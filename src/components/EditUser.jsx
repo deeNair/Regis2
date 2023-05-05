@@ -1,10 +1,10 @@
 
-import axios from "axios";
+//import axios from "axios";
 import { FormControl, FormGroup, InputLabel, Input, Typography, styled, Button } from "@mui/material";
-import { useState, useEffect,  } from "react";
-import { editUser} from "../service/api";
+import { useState, useEffect } from "react";
+import { editUser, getUser} from "../service/api";
 import { useParams } from "react-router-dom";
-//import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 //const {id}=useParams();
 
 
@@ -12,15 +12,10 @@ import { useParams } from "react-router-dom";
 // width: 50%;
 // margin:5% auto 0 auto;`
 
-const {User, setUser}=useState(defaultValue);
-useEffect(()=>{
-    loadUserDetails();
-},[])
 
-const EditUserDetails= async()=>{
-    await EditUser(id);
-    Navigate('/all');
-}
+
+
+
 const defaultValue = {
     name: "",
     username: "",
@@ -28,8 +23,31 @@ const defaultValue = {
     phone: ""
 }
 //const useNavigate= navigate();
+const Container = styled(FormGroup)`
+  width: 50%;
+    color:#615954;
+    margin: 5% 0 0 25%;
+    & > div {
+        margin-top: 20px;
+      }
+`;
+
 const EditUser = () => {
     const [user, setUser] = useState(defaultValue);
+    const {id} = useParams();
+    let navigate = useNavigate();
+
+    useEffect(()=>{
+        loadUserDetails();
+    },[]);
+
+    const loadUserDetails = async() =>{
+        let response = await getUser(id);
+        setUser(response.data);
+        console.log(response.data);
+        console.log(user);
+      }
+  
 
     const onValueChange = (e) => {
         setUser({ ...user, [e.target.name]: e.target.value })
@@ -37,7 +55,7 @@ const EditUser = () => {
     }
     
 
-    const EditUserDetails =  (e) => {
+    /**const EditUserDetails =  (e) => {
         e.preventDefault();
          //navigate('/all');
          axios.post("http://localhost:3001/add", {
@@ -46,7 +64,15 @@ const EditUser = () => {
       });
       window.location.reload();
      
-    };
+    };*/
+
+    const editUserDetails = async() => {
+        //call the api  
+      await editUser(user,id);
+          navigate('/all');
+      }
+
+
     
         return (
          <Container>
@@ -68,7 +94,7 @@ const EditUser = () => {
                 <Input onChange={(e) => onValueChange(e)} name="phone" value= {user.phone}/>
             </FormControl>
             <FormControl>
-                <Button variant="contained" onClick={() => EditUserDetails()}>Edit User</Button>
+                <Button variant="contained" onClick={() => editUserDetails()}>Edit User</Button>
             </FormControl>
         </Container>
     )
