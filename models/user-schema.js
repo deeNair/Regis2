@@ -2,18 +2,18 @@ const mongoose =require ("mongoose");
 const Schema = mongoose.Schema;
 const autoIncrement= require('mongoose-auto-increment');
 
-const userSchema= new Schema({
-    name:{ type:String, required: true },
-    username: { type:String, required: true },
-    email: { type:String, required: true },
-    phone:{ type:String, required: true }
+const uSchema= new Schema({
+    name:{type:String, required: true },
+    username:{type:String, required: true },
+    email:{type:String, required: true },
+    phone:{type:String, required: true }
 }, {
     timestamps: true
     })
 
     autoIncrement.initialize(mongoose.connection);
-userSchema.plugin(autoIncrement.plugin, 'Jobs');
+uSchema.plugin(autoIncrement.plugin, 'Jobs');
 
-const user= mongoose.model('user', userSchema);
+const Nobs= mongoose.model('Nobs', uSchema);
 
-module.exports =user;
+module.exports =Nobs;

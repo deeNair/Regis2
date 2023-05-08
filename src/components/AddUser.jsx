@@ -41,7 +41,7 @@ console.log (e.target.name)
        
        await addUser(user);
        console.log(user);
-       //navigate('/all');
+       navigate('/all');
      
     };
     

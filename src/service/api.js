@@ -1,9 +1,10 @@
-//const axios=require('axios');
+
 import axios from 'axios';
+//const axios=require('axios');
 
 const URL="http://localhost:3001";
 
- export const addUser=async(data)=>{
+export const addUser=async(data)=>{
     try{
         
 
@@ -13,7 +14,7 @@ return await axios.post(`${URL}/add`,data );
         console.log('error while calling',error);
     }
     }
-export  const getUsers= async()=>{
+ export const getUsers= async()=>{
     try {
        return await axios.get(`${URL}/all`)
     }catch (error){
@@ -27,7 +28,7 @@ export const getUser= async(id)=>{
         console.log('error calling api',error);
     }
 }
-   export const editUser=async(user,id)=>{
+  export const editUser=async(user,id)=>{
         try{
             return await axios.post(`${URL}/${id}`, user)
         }
@@ -37,7 +38,7 @@ export const getUser= async(id)=>{
     }
     }
 
-    export const deleteUser =async(id)=>{
+  export const deleteUser =async(id)=>{
         try {
    
            return await axios.delete(`${URL}/${id}`);
